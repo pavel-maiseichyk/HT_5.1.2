@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">HT_5.1.2</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="zero">0</string>
+    <string name="signDot">.</string>
+    <string name="signC">C</string>
+    <string name="signPlusMinus">+/-</string>
+    <string name="signPercent">%</string>
+    <string name="signDivision">/</string>
+    <string name="signMultiplication">*</string>
+    <string name="signPlus">+</string>
+    <string name="signMinus">-</string>
+    <string name="signEquality">=</string>
+    <string name="F1">M</string>
+    <string name="F2">A</string>
+    <string name="F3">I</string>
+    <string name="F4">S</string>
+    <string name="F5">E</string>
+    <string name="F6">I</string>
+    <string name="F7">C</string>
+    <string name="F8">H</string>
+    <string name="F9">Y</string>
+    <string name="F10">K</string>
+    <string name="switchButton">SWITCH</string>
+    <string name="OKButton">OK</string>
+    <string name="signSin">sin</string>
+    <string name="signCos">cos</string>
+    <string name="signTan">tan</string>
+    <string name="signLeftDash">(</string>
+    <string name="signRightDash">)</string>
+    <string name="Settings">Settings</string>
+    <string name="settingsHint">Введите назвние файла</string>
+</resources>
