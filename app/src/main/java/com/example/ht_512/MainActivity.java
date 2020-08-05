@@ -1,14 +1,25 @@
 package com.example.ht_512;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,16 +39,54 @@ public class MainActivity extends AppCompatActivity {
     Button button0;
     Button buttonDot;
     Button buttonC;
-    Button settingsButton;
+    Button wallpaperButton;
     ImageView image;
     private boolean isInUsualMode;
+    EditText fileNameET;
+    String fileName;
+    Button buttonOK;
+    public static final int REQUEST_PERMISSION = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
+        buttonOK = findViewById(R.id.buttonOk);
+        fileNameET = findViewById(R.id.fileName);
+
+        int permissionStatus = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionStatus == PackageManager.PERMISSION_GRANTED)
+            Toast.makeText(this, "Всё гуд, разрешение есть", Toast.LENGTH_SHORT).show();
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);}
+
+        buttonOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                fileName = fileNameET.getText().toString();
+                if (isExternalStorageWritable()) {
+                    File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), fileName);
+                    Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    if (bitmap != null)
+                    {
+                        image.setImageBitmap(bitmap);}
+                    else
+                        Toast.makeText(MainActivity.this, "Боюсь, произошла ошибочка :(", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
+
+
 
     public void init() {
         image  = findViewById(R.id.image);
@@ -56,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         buttonC = findViewById(R.id.buttonC);
         buttonSwitch = findViewById(R.id.buttonSwitch);
         additionalButtons = findViewById(R.id.additionalButtons);
-        settingsButton = findViewById(R.id.settings);
+        wallpaperButton = findViewById(R.id.wallpaperButton);
         name = findViewById(R.id.name);
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -184,11 +233,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        wallpaperButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Settings.class);
-                startActivity(intent);
+            public void onClick(View view) {
+                View layout = findViewById(R.id.wallpaperLayout);
+                if (layout.getVisibility() == View.INVISIBLE) layout.setVisibility(View.VISIBLE);
+                else layout.setVisibility(View.INVISIBLE);
             }
         });
 

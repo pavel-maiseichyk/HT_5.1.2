@@ -36,6 +36,6 @@
     <string name="signTan">tan</string>
     <string name="signLeftDash">(</string>
     <string name="signRightDash">)</string>
-    <string name="Settings">Settings</string>
+    <string name="wallpaperButton">Замена фона</string>
     <string name="settingsHint">Введите назвние файла</string>
 </resources>
